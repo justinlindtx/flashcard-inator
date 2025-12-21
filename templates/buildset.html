@@ -5,12 +5,45 @@
 {% endblock %}
 
 {% block body %}
-<h2>Buildin</h2>
-<form action="/create" method="POST">
-	<label for="set_title">Title:</label>
-	<input type="text" name="set_title" id="set_title" required>
-	<label for="set_desc">Description:</label>
-	<input type="text" name="set_desc" id="set_desc">
+<h2>Build a flashcard set</h2>
+<form action="/cancel_set" method="GET">
+	<button type="submit">Cancel</button>
+</form>
+<form action="/add_element" method="POST">
+	<div>
+		<label for="set_title">Title:</label>
+		<input type="text" name="set_title" id="set_title" value="{{set_title}}">
+	</div>
+	<div>
+		<label for="set_desc">Description:</label>
+		<input type="text" name="set_desc" id="set_desc" value="{{set_desc}}">
+	</div>
+	{% if cards | length < 1 %}
+	<p>Add a card</p>
+	{% else %}
+	<table id="flashcards">
+		<tr>
+			<th>Term</th>
+			<th>Definition</th>
+		</tr>
+		{% for card in cards %}
+		<tr>
+			<td>{{card.front_text}}</td>
+			<td>{{card.back_text}}</td>
+			<td>
+				<a href="/delete_card/{{card.id}}">Delete</a>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+	{% endif %}
+	<div>
+		<input type="text" name="front_text" id="front_text">
+		<input type="text" name="back_text" id="back_text">
+		<button type="submit">Add Card</button>
+	</div>
+</form>
+<form action="/save_set" method="GET">
 	<button type="submit">Create Set</button>
 </form>
 {% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Study</title>
+{% endblock %}
+
+{% block body %}
+<h2>Study set: {{set.title}}</h2>
+{% for card in set.cards %}
+
+{% endfor %}
+{% endblock %}

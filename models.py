@@ -15,7 +15,7 @@ class User(db.Model):
 class FlashcardSet(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-	title = db.Column(db.String, nullable=False)
+	title = db.Column(db.String, default="New Set")
 	description = db.Column(db.String)
 	created_at = db.Column(db.DateTime, default=datetime.now)
 	last_updated = db.Column(db.DateTime, default=datetime.now)
