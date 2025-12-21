@@ -1,0 +1,9 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# SQLite database
+*.db
+
+# Flask / environment config
+instance/

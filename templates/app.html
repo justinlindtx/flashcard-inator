@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Home</title>
+{% endblock %}
+
+{% block body %}
+<h2>Flashcard-inator</h2>
+<h3>Create, read, and study flashcard sets</h3>
+
+<form action="/buildset" method="GET">
+	<button type="submit">Create Set</button>
+</form>
+
+{% if sets | length < 1%}
+<p>No sets have been added</p>
+{% else %}
+<table class="sets">
+	{% for set in sets %}
+	<tr>
+		<td>{{set.title}}</td>
+		<td>{{set.last_updated.strftime("%Y-%m-%d")}}</td>
+		<td>
+			<a href="/study/{{set.id}}">Study</a>
+		</td>
+		<td>
+			<a href="/edit/{{set.id}}">Edit</a>
+		</td>
+		<td>
+			<a href="/delete/{{set.id}}">Delete</a>
+		</td>
+	</tr>
+	{% endfor %}
+</table>
+{% endif %}
+
+<form action="/logout" method="POST">
+	<button type="submit">Logout</button>
+</form>
+{% endblock %}

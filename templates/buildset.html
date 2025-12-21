@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>New Set</title>
+{% endblock %}
+
+{% block body %}
+<h2>Buildin</h2>
+<form action="/create" method="POST">
+	<label for="set_title">Title:</label>
+	<input type="text" name="set_title" id="set_title" required>
+	<label for="set_desc">Description:</label>
+	<input type="text" name="set_desc" id="set_desc">
+	<button type="submit">Create Set</button>
+</form>
+{% endblock %}
