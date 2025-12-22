@@ -51,6 +51,7 @@ def register():
 	db.session.commit()
 	return redirect(url_for('index'))
 
+# Display the main page with a list of the user's flashcard sets
 @app.route('/app')
 @login_required
 def app_page():
@@ -58,7 +59,7 @@ def app_page():
 	session.pop('set_id', None)
 	session.pop('set_title', None)
 	session.pop('set_desc', None)
-	sets = FlashcardSet.query.filter_by(user_id=user_id).order_by(FlashcardSet.last_updated).all()
+	sets = FlashcardSet.query.filter_by(user_id=user_id).order_by(FlashcardSet.last_updated.desc()).all()
 	return render_template('app.html', sets=sets)
 
 @app.route('/buildset')
@@ -114,12 +115,6 @@ def delete_card(id:int):
 	except Exception as e:
 		return f"ERROR: {e}"
 
-# Go back to main page after creating a set
-@app.route('/save_set')
-@login_required
-def save_set():
-	return redirect(url_for('app_page'))
-
 # Go back to main page and delete any in progress sets
 @app.route('/cancel_set')
 @login_required
@@ -141,6 +136,12 @@ def delete_set(id:int):
 		return redirect(url_for('app_page'))
 	except Exception as e:
 		return f"ERROR: {e}"
+	
+@app.route('/study/<int:id>')
+@login_required
+def study_set(id:int):
+	set = FlashcardSet.query.get(id)
+	return render_template('study.html', set=set)
 
 
 @app.route('/logout', methods=["POST"])

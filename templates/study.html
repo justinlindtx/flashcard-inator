@@ -6,7 +6,20 @@
 
 {% block body %}
 <h2>Study set: {{set.title}}</h2>
-{% for card in set.cards %}
-
-{% endfor %}
+<p>{{set.description}}</p>
+<form action="/app" method="GET">
+	<button type="submit">Back</button>
+</form>
+<table>
+	<tr>
+		<th>Term</th>
+		<th>Definition</th>
+	</tr>
+	{% for card in set.cards %}
+	<tr>
+		<td>{{card.front_text}}</td>
+		<td>{{card.back_text}}</td>
+	</tr>
+	{% endfor %}
+</table>
 {% endblock %}

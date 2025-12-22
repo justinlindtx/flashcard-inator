@@ -5,36 +5,52 @@
 {% endblock %}
 
 {% block body %}
-<h2>Flashcard-inator</h2>
-<h3>Create, read, and study flashcard sets</h3>
+<header>
+	<h1 class="app-title">Flashcard-inator</h1>
+	<p class="subtitle">Create, read, and study flashcard sets</p>
+</header>
+<div class="container">
+	<div id="create-set">
+		<form action="/buildset" method="GET">
+			<button type="submit">Create Set</button>
+		</form>
+	</div>
+	<h3 class="section-title">Your Flashcard Sets</h3>
+	{% if sets | length < 1%}
+	<p class="empty-state">No sets have been added</p>
+	{% else %}
+	<table class="sets-table">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Last Updated</th>
+				<th colspan="3">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for set in sets %}
+			<tr>
+				<td>{{set.title}}</td>
+				<td>{{set.last_updated.strftime("%Y-%m-%d")}}</td>
+				<td>
+					<a class="link" href="/study/{{set.id}}">Study</a>
+				</td>
+				<td>
+					<a class="link" href="/edit/{{set.id}}">Edit</a>
+				</td>
+				<td>
+					<a class="link" href="/delete/{{set.id}}">Delete</a>
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	{% endif %}
 
-<form action="/buildset" method="GET">
-	<button type="submit">Create Set</button>
-</form>
-
-{% if sets | length < 1%}
-<p>No sets have been added</p>
-{% else %}
-<table class="sets">
-	{% for set in sets %}
-	<tr>
-		<td>{{set.title}}</td>
-		<td>{{set.last_updated.strftime("%Y-%m-%d")}}</td>
-		<td>
-			<a href="/study/{{set.id}}">Study</a>
-		</td>
-		<td>
-			<a href="/edit/{{set.id}}">Edit</a>
-		</td>
-		<td>
-			<a href="/delete/{{set.id}}">Delete</a>
-		</td>
-	</tr>
-	{% endfor %}
-</table>
-{% endif %}
-
-<form action="/logout" method="POST">
-	<button type="submit">Logout</button>
-</form>
+	<div class="logout">
+		<form action="/logout" method="POST">
+			<button type="submit" class="btn-secondary">Logout</button>
+		</form>
+	</div>
+</div>
 {% endblock %}

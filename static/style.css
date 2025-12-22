@@ -1,7 +1,111 @@
 body {
-	background-color: grey;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background-color: #1a242e;
+	color: #d4d4d4;
+	margin: 0;
+	padding: 0;
 }
 
-.sets {
-	background-color: rgb(159, 159, 159);
+header {
+	padding: 1.5rem;
+	text-align: center;
+}
+
+.app-title {
+	margin: 0;
+	font-size: 2rem;
+}
+
+.section-title {
+	margin-left: 1rem;
+	margin-bottom: 1rem;
+}
+
+.subtitle {
+	margin-top: 0.5rem;
+	font-size: 1rem;
+	color: #d1d5db;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 1rem auto;
+    padding: 0 1rem;
+}
+
+/* Buttons */
+button {
+	padding: 0.6rem 1.2rem;
+	font-size: 0.95rem;
+	color: white;
+	border-radius: 4px;
+	border-width: 2px;
+	border-color: #d1d5db;
+	background-color: #0054a9;
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #00458b;
+}
+
+button:active {
+	transform: scale(0.95)
+}
+
+.btn-secondary {
+	background-color: #093561;
+}
+
+.btn-secondary:hover {
+	background-color: #072543;
+}
+
+#create-set {
+	margin-bottom: 2rem;
+	text-align: center;
+}
+
+.logout {
+	margin-top: 3rem;
+	text-align: center;
+}
+
+/* Flashcard sets*/
+.empty-state {
+    font-style: italic;
+    color: #6b7280;
+}
+
+.sets-table {
+	background-color: #093561;
+	width: 100%;
+	border-collapse: separate;
+	border-radius: 6px;
+	overflow: hidden;
+}
+
+.sets-table thead {
+	background-color: #082e54;
+}
+
+.sets-table th, .sets-table td {
+	padding: 0.75rem 1rem;
+	text-align: left;
+	font-size: 0.95rem;
+}
+
+.sets-table tbody tr:hover {
+    background-color: #0b427a;
+}
+
+/* Links */
+.link {
+    text-decoration: none;
+    font-weight: 500;
+	color: #2563eb;
+}
+
+.link:hover {
+	text-decoration: underline;
 }
