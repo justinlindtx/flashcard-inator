@@ -107,7 +107,14 @@ def add_element():
 @app.route('/delete_card/<int:id>')
 @login_required
 def delete_card(id:int):
-	deleted_card = Flashcard.query.get(id)
+	# Access control
+	user_id = session.get('user_id')
+	deleted_card = Flashcard.query.join(FlashcardSet).filter(
+		Flashcard.id == id, FlashcardSet.user_id == user_id).first()
+	if deleted_card is None:
+		abort(404)
+	
+	# Delete database entry
 	try:
 		db.session.delete(deleted_card)
 		db.session.commit()
@@ -129,7 +136,13 @@ def cancel_set():
 @app.route('/delete/<int:id>')
 @login_required
 def delete_set(id:int):
-	deleted_set = FlashcardSet.query.get(id)
+	# Access control
+	user_id = session.get('user_id')
+	deleted_set = FlashcardSet.query.filter_by(id=id, user_id=user_id).first()
+	if deleted_set is None:
+		abort(404)
+	
+	# Delete database entry
 	try:
 		db.session.delete(deleted_set)
 		db.session.commit()
@@ -140,7 +153,12 @@ def delete_set(id:int):
 @app.route('/study/<int:id>')
 @login_required
 def study_set(id:int):
-	set = FlashcardSet.query.get(id)
+	# Access control
+	user_id = session.get('user_id')
+	set = FlashcardSet.query.filter_by(id=id, user_id=user_id).first()
+	if set is None:
+		abort(404)
+	# Return webpage
 	return render_template('study.html', set=set)
 
 

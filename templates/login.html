@@ -5,23 +5,33 @@
 {% endblock %}
 
 {% block body %}
-<h1>Welcome to the Flashcard-inator</h1>
-<h3>Login here</h3>
-<form action="/login" method="POST">
-	<div>
-		<label for="username">Username:</label>
-		<input type="text" name="username" id="username" required>
+<header>
+	<h1 class="app-title">Welcome to the Flashcard-inator</h1>
+	<h3 class="section-title">Login here</h3>
+</header>
+<div class="loginbox">
+	<form action="/login" method="POST" autocomplete="off">
+		<div class="loginrow">
+			<label for="username">Username:</label>
+			<input type="text" name="username" id="username" required>
+		</div>
+		<div class="loginrow">
+			<label for="password">Password:</label>
+			<input type="password" name="password" id="password" required>
+		</div>
+		{% if error %}
+		<div class="error-message">
+			{{ error }}
+		</div>
+		{% endif %}
+		<div class="loginrow">
+			<button type="submit">Log In</button>
+		</div>
+	</form>
+	<div class="loginrow">
+		<form action="/register" method="GET">
+			<button type="submit">Create an Account</button>
+		</form>
 	</div>
-	<div>
-		<label for="password">Password:</label>
-		<input type="password" name="password" id="password" required>
-	</div>
-	<button type="submit">Log In</button>
-</form>
-{% if error %}
-<p style="color:red">{{ error }}</p>
-{% endif %}
-<form action="/register" method="GET">
-	<button type="submit">Create an Account</button>
-</form>
+</div>
 {% endblock %}
