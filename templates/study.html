@@ -10,6 +10,25 @@
 <form action="/app" method="GET">
 	<button type="submit">Back</button>
 </form>
+<div class="card-deck">
+	{% for card in set.cards %}
+	<div class="card-container {% if loop.first %}active{% endif %}">
+		<div class="card" id="card">
+			<div class="card-face card-front">
+				<h3>{{card.front_text}}</h3>
+				<small style="font-style: italic">Click to flip</small>
+			</div>
+			<div class="card-face card-back">
+				<h3>{{card.back_text}}</h3>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+<div class="navigation">
+	<button class="btn-secondary" id="btn-prev">Previous</button>
+	<button class="btn-secondary" id="btn-next">Next</button>
+</div>
 <table>
 	<tr>
 		<th>Term</th>
@@ -22,4 +41,5 @@
 	</tr>
 	{% endfor %}
 </table>
+<script src="{{url_for("static", filename="flip_card.js")}}"></script>
 {% endblock %}
