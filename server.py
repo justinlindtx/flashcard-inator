@@ -161,6 +161,28 @@ def study_set(id:int):
 	# Return webpage
 	return render_template('study.html', set=set)
 
+@app.route('/edit-card/<int:id>', methods=["POST", "GET"])
+@login_required
+def edit_card(id:int):
+	# Access control
+	user_id = session.get('user_id')
+	card = Flashcard.query.join(FlashcardSet).filter(
+		Flashcard.id == id, FlashcardSet.user_id == user_id).first()
+	if card is None:
+		abort(404)
+
+	# Return editing webpage
+	if request.method == "GET":	
+		return render_template('edit.html', card=card)
+	# Save edit to database
+	else:
+		card.front_text = request.form.get('front_text');
+		card.back_text = request.form.get('back_text');
+		try:
+			db.session.commit()
+			return redirect(url_for('study_set', id=card.set_id))
+		except Exception as e:
+			return f"ERROR: {e}"
 
 @app.route('/logout', methods=["POST"])
 def logout():

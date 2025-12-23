@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Edit</title>
+{% endblock %}
+
+{% block body %}
+<form action="/edit-card/{{card.id}}" method="POST">
+	<div>
+		<label for="front_text">Term:</label>
+		<input type="text" name="front_text" id="front_text" value="{{card.front_text}}">
+	</div>
+	<div>
+		<label for="back_text">Definition:</label>
+		<input type="text" name="back_text" id="back_text" value="{{card.back_text}}">
+	</div>
+	<div>
+		<button type="submit">Save</button>
+	</div>
+</form>
+{% endblock %}
