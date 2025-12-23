@@ -10,6 +10,7 @@ from models import db, User, FlashcardSet, Flashcard
 app = Flask(__name__)
 app.secret_key = 'unguessable-key'
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
+app.config['SQLALCHEMY_TRACK_MODIFICATION'] = False
 db.init_app(app)
 
 def login_required(view):

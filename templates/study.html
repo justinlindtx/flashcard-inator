@@ -5,11 +5,13 @@
 {% endblock %}
 
 {% block body %}
-<h2>Study set: {{set.title}}</h2>
-<p>{{set.description}}</p>
-<form action="/app" method="GET">
-	<button type="submit">Back</button>
-</form>
+<div style="padding: 1rem;">
+	<h2>Study set: {{set.title}}</h2>
+	<p>{{set.description}}</p>
+	<form action="/app" method="GET">
+		<button type="submit">Back</button>
+	</form>
+</div>
 <div class="card-deck">
 	{% for card in set.cards %}
 	<div class="card-container {% if loop.first %}active{% endif %}">
@@ -29,20 +31,24 @@
 	<button class="btn-secondary" id="btn-prev">Previous</button>
 	<button class="btn-secondary" id="btn-next">Next</button>
 </div>
-<table>
-	<tr>
-		<th>Term</th>
-		<th>Definition</th>
-	</tr>
-	{% for card in set.cards %}
-	<tr>
-		<td>{{card.front_text}}</td>
-		<td>{{card.back_text}}</td>
-		<td>
-			<a class="link" href="/edit-card/{{card.id}}">Edit</a>
-		</td>
-	</tr>
-	{% endfor %}
+<table class="cards-table">
+	<thead>
+		<tr>
+			<th>Term</th>
+			<th>Definition</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for card in set.cards %}
+		<tr>
+			<td>{{card.front_text}}</td>
+			<td>{{card.back_text}}</td>
+			<td class="card-action">
+				<a class="link" href="/edit-card/{{card.id}}">Edit</a>
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
 </table>
 <script src="{{url_for("static", filename="flip_card.js")}}"></script>
 {% endblock %}
