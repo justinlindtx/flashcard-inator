@@ -7,3 +7,4 @@ __pycache__/
 
 # Flask / environment config
 instance/
+venv/
